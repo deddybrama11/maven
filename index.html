@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAVEN | Soal 1</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        background-color: aqua;
+        padding: 1rem;
+      }
+      .wrapper {
+        padding: 1rem;
+        padding-left: 4rem;
+        padding-right: 4rem;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 1rem;
+        min-width: 700px;
+        box-shadow: 4px 6px 11px #7c7c7c;
+      }
+      .wrapper-input {
+        width: 100%;
+        display: flex;
+        padding-bottom: 10px;
+      }
+      #input-number {
+        flex: 1;
+      }
+      .data {
+        padding: 0.5rem;
+        border: solid;
+        background-color: aquamarine;
+        border-width: 1px;
+        margin-bottom: 3px;
+      }
+      #wrapper-data {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Maven Hiring Test - Logic</h1>
+      <div class="wrapper-input">
+        <input type="number" id="input-number" placeholder="0" min="1" />
+        <button id="input-button">Generate</button>
+      </div>
+      <div id="wrapper-data"></div>
+    </div>
+  </body>
+  <script>
+    const number = document.getElementById("input-number");
+    number.onkeydown = (e) => {
+      if (
+        !(
+          (e.keyCode > 95 && e.keyCode < 106) ||
+          (e.keyCode > 48 && e.keyCode < 58) ||
+          e.keyCode == 8
+        )
+      ) {
+        return false;
+      }
+    };
+    const btn = document.getElementById("input-button");
+    let wrapperData = document.getElementById("wrapper-data");
+    let setHtml = "";
+    let numberTmp = 0;
+
+    btn.addEventListener("click", () => {
+      setHtml = "";
+      for (let i = 0; i < number.value.length; i++) {
+        setHtml += `<div class="data">${number.value[i]}${"0".repeat(
+          Math.abs(number.value.length - i - 1)
+        )}</div>`;
+      }
+      wrapperData.innerHTML = setHtml;
+    });
+  </script>
+</html>
