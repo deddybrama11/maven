@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>MAVEN | Soal 2</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Maven Hiring Test - Logic</h1>
+      <div class="wrapper-input">
+        <input type="number" id="input-number" placeholder="0" min="1" />
+        <button id="input-button">Start</button>
+      </div>
+      <div id="wrapper-data-chart"></div>
+    </div>
+  </body>
+  <script>
+    //Initialize variable
+    const inputNumber = document.getElementById("input-number");
+    const btn = document.getElementById("input-button");
+    let numberVal = 0;
+    let wrapperData = document.getElementById("wrapper-data-chart");
+    let setHtml = "";
+    let toggle = false;
+    const color = ["green", "yellow", "red", "blue"];
+
+    // Only accept number
+    inputNumber.onkeydown = (e) => {
+      if (
+        !(
+          (e.keyCode > 95 && e.keyCode < 106) ||
+          (e.keyCode > 47 && e.keyCode < 58) ||
+          e.keyCode == 8
+        )
+      ) {
+        return false;
+      }
+    };
+
+    // Show Graph of random number based on value from input
+    const showGraph = () => {
+      setHtml = "";
+      for (let i = 0; i < numberVal; i++) {
+        let randValue = Math.floor(Math.random() * (101 - 1) + 1);
+        setHtml += `<div class="data-chart" style="background-color:${
+          color[Math.floor(randValue / 25 - 0.01)]
+        }; height:${randValue}px">${randValue}</div>`;
+      }
+      wrapperData.innerHTML = setHtml;
+    };
+
+    // Create function onInterval that can be paused when toggle = false
+    const onInterval = () => {
+      if (toggle == false) return;
+      showGraph();
+    };
+
+    setInterval(onInterval, 3000);
+
+    //Add listener to button onclick
+    btn.addEventListener("click", () => {
+      toggle = !toggle;
+      numberVal = inputNumber.value;
+      if (toggle) {
+        // show the graph user click the button
+        showGraph();
+        btn.innerHTML = "Stop";
+      } else {
+        setHtml = "";
+        btn.innerHTML = "Start";
+        wrapperData.innerHTML = setHtml;
+      }
+    });
+  </script>
+</html>
