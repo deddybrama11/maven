@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAVEN | Soal 1</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Maven Hiring Test - Logic</h1>
+      <div class="wrapper-input">
+        <input type="number" id="input-number" placeholder="0" min="1" />
+        <button id="input-button">Generate</button>
+      </div>
+      <div id="wrapper-data"></div>
+    </div>
+  </body>
+  <script>
+    //Initialize variable
+    const inputNumber = document.getElementById("input-number");
+    const btn = document.getElementById("input-button");
+    let wrapperData = document.getElementById("wrapper-data");
+    let setHtml = "";
+
+    // Only accept number without 0
+    inputNumber.onkeydown = (e) => {
+      if (
+        !(
+          (e.keyCode > 95 && e.keyCode < 106) ||
+          (e.keyCode > 48 && e.keyCode < 58) ||
+          e.keyCode == 8
+        )
+      ) {
+        return false;
+      }
+    };
+
+    btn.addEventListener("click", () => {
+      setHtml = "";
+      //loop based on length of input number
+      for (let i = 0; i < inputNumber.value.length; i++) {
+        //get i of input number and then multiply string "0" by the result of input number length - index loop -1
+        setHtml += `<div class="data">${inputNumber.value[i]}${"0".repeat(
+          Math.abs(inputNumber.value.length - i - 1)
+        )}</div>`;
+      }
+      wrapperData.innerHTML = setHtml;
+    });
+  </script>
+</html>
